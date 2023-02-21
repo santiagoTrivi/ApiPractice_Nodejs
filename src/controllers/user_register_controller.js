@@ -1,23 +1,25 @@
 const { request, response } = require("express");
 const bcryptjs = require('bcryptjs');
+const { Rol } = require('../models');
 
 
-
-const userRegister = (req = request, res = response) => {
+const userRegister = async (req = request, res = response) => {
     const {name, email, password, rol} = req.body;
 
     // check if the rol exist in the database
+    try {
+    const checkRol = await Rol.findOne({where: {rol}});
+    const rolId = checkRol.id;
 
     const salt = bcryptjs.genSaltSync(10);
     const securitypassword = bcryptjs.hashSync(password, salt);
 
-    try {
         res.json({
             message: 'correct response',
             name,
             email,
             securitypassword,
-            rol
+            rolId
         });
         
     } catch (error) {

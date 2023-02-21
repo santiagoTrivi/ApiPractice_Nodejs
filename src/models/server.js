@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const { sequelize } = require('../database/database_connection');
+
 
 class Server {
 
@@ -14,9 +16,24 @@ class Server {
             register: '/disneyApi/auth/register'
         };
 
+        this.databaseConnection();
+
         this.middelawares();
 
         this.routes();
+    };
+
+
+    async databaseConnection(){
+        
+        try {
+            await sequelize.sync();
+            await sequelize.authenticate();
+
+        } catch (error) {
+            throw new Error(error);
+        }
+
     };
 
 
