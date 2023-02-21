@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-
+const bodyParser = require('body-parser');
 
 class Server {
 
@@ -10,10 +10,17 @@ class Server {
 
 
         this.appPath = {
-            auth: 'disneyApi/auth/login',
-            register: 'disneyApi/auth/register'
+            login: '/disneyApi/auth/login',
+            register: '/disneyApi/auth/register'
         };
+
+        this.middelawares();
+
+        this.routes();
     };
+
+
+
 
     middelawares(){
 
@@ -23,6 +30,16 @@ class Server {
 
         this.app.use(express.json());
     };
+
+
+
+    routes(){
+
+        this.app.use(this.appPath.register, require('../routes/user_register_routes'));
+        this.app.use(this.appPath.login, require('../routes/user_auth_routes'));
+    }
+
+
 
 
     listen(){
