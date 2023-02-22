@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { sequelize } = require('../database/database_connection');
+const fileUpload = require('express-fileupload');
 
 
 class Server {
@@ -13,7 +14,8 @@ class Server {
 
         this.appPath = {
             login: '/disneyApi/auth/login',
-            register: '/disneyApi/auth/register'
+            register: '/disneyApi/auth/register',
+            user: '/disneyApi/auth/user'
         };
 
         this.databaseConnection();
@@ -46,6 +48,12 @@ class Server {
         this.app.use(bodyParser.urlencoded({ extended: true }));
 
         this.app.use(express.json());
+
+        this.app.use(fileUpload({
+            useTempFiles : true,
+            tempFileDir : '/tmp/',
+            createParentPath: true
+        }));
     };
 
 

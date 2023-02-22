@@ -5,10 +5,11 @@ const { Rol } = require("./rol_model");
 
 
 const User = sequelize.define('User', {
+
     id:{
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true
     },
     name:{
         type: DataTypes.STRING(200)
