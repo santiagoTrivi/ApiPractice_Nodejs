@@ -3,7 +3,7 @@ const { sequelize } = require("../database/database_connection");
 const {Movie} = require('./character_movie_model');
 
 
-const Gender = sequelize.define('Gender', {
+const Genre = sequelize.define('Genre', {
 
     id:{
         type: DataTypes.UUID,
@@ -19,14 +19,14 @@ const Gender = sequelize.define('Gender', {
 
 });
 
-Movie.hasOne(Gender);
-Gender.belongsTo(Movie);
+Movie.hasOne(Genre);
+Genre.belongsTo(Movie);
 
 
 
 module.exports = {
 
-    Gender
+    Genre
 
 };
 
