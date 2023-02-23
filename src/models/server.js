@@ -14,8 +14,8 @@ class Server {
 
         this.appPath = {
             login: '/disneyApi/auth/login',
-            register: '/disneyApi/auth/register',
-            user: '/disneyApi/auth/user'
+            user: '/disneyApi/auth',
+            character: '/disneyApi/auth/character'
         };
 
         this.databaseConnection();
@@ -60,8 +60,9 @@ class Server {
 
     routes(){
 
-        this.app.use(this.appPath.register, require('../routes/user_register_routes'));
+        this.app.use(this.appPath.user, require('../routes/user_routes'));
         this.app.use(this.appPath.login, require('../routes/user_auth_routes'));
+        this.app.use(this.appPath.character, require('../routes/character_routes'));
     }
 
 

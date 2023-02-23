@@ -19,8 +19,9 @@ const Genre = sequelize.define('Genre', {
 
 });
 
-Movie.hasOne(Genre);
+Movie.hasMany(Genre);
 Genre.belongsTo(Movie);
+
 
 
 

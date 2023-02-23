@@ -20,7 +20,7 @@ const Character = sequelize.define('Character', {
     weight:{
         type: DataTypes.FLOAT
     },
-    story:{
+    history:{
         type: DataTypes.STRING(500)
     },
     img:{
@@ -43,7 +43,7 @@ const Movie = sequelize.define('Movie', {
     CreationDate:{
         type: DataTypes.DATE
     },
-    calification:{
+    rating:{
         type: DataTypes.TINYINT(1)
     },
     img:{
@@ -52,8 +52,8 @@ const Movie = sequelize.define('Movie', {
 
 });
 
-Character.belongsToMany(Movie, {through: 'CharacterMovie'});
-Movie.belongsToMany(Character, {through: 'CharacterMovie'});
+Character.belongsToMany(Movie, {through: 'characters_movies'});
+Movie.belongsToMany(Character, {through: 'characters_movies'});
 
 
 module.exports = {
