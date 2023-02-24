@@ -15,7 +15,7 @@ class Server {
         this.appPath = {
             login: '/disneyApi/auth/login',
             user: '/disneyApi/auth',
-            character: '/disneyApi/auth/character'
+            character: '/disneyApi/auth/characters'
         };
 
         this.databaseConnection();
