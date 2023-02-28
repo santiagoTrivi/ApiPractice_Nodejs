@@ -40,8 +40,8 @@ const Movie = sequelize.define('Movie', {
     tittle:{
         type: DataTypes.STRING(200)
     },
-    CreationDate:{
-        type: DataTypes.DATE
+    creationDate:{
+        type: DataTypes.DATEONLY
     },
     rating:{
         type: DataTypes.TINYINT(1)

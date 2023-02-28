@@ -10,7 +10,7 @@ const Genre = sequelize.define('Genre', {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true
     },
-    gender:{
+    genre:{
         type: DataTypes.STRING(200)
     },
     img:{
@@ -19,8 +19,9 @@ const Genre = sequelize.define('Genre', {
 
 });
 
-Movie.hasMany(Genre);
-Genre.belongsTo(Movie);
+Genre.hasMany(Movie);
+Movie.belongsTo(Genre);
+
 
 
 
