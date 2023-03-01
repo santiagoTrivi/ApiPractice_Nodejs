@@ -1,7 +1,9 @@
+const fs = require('fs');
+const path = require('path');
 const { request, response } = require("express");
 const { Op } = require("sequelize");
 const { Movie, Character, Genre } = require("../models");
-
+const { uploadFiles } = require("../helpers");
 
 
 const postMovie = async( req = request, res = response ) => {
@@ -131,6 +133,29 @@ const getAllmovies = async(req = request, res = response) => {
 
 };
 
+const getMoviePicture = async( req = request, res = response ) => {
+
+    const { id } = req.params;
+
+    try {
+        const movie = await Movie.findByPk(id);
+
+        if (movie.img){
+            const pathFile = path.join(__dirname, '../uploads', "movie", movie.img);
+            if(fs.existsSync(pathFile)){
+                return res.sendFile(pathFile);
+            };
+
+            return res.status(500).send('Sonthing went wrong');
+        };
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Sonthing went wrong');
+    }
+
+};
+
 const updateMovie = async(req = request, res = response) => {
 
     const { id } = req.params;
@@ -156,6 +181,19 @@ const updateMovie = async(req = request, res = response) => {
         if(genre){
             const [foundGenre] = await Genre.findOrCreate({where:{genre}});
             await movie.update({GenreId: foundGenre.id});
+        };
+
+        if(req.files){
+            if (movie.img){
+                const pathFile = path.join(__dirname, '../uploads', "movie", movie.img);
+                if(fs.existsSync(pathFile)){
+                    fs.unlinkSync(pathFile);
+                };
+            };
+
+            const fileName = await uploadFiles(req.files, undefined, "movie");
+            await movie.update({img: fileName});
+
         };
 
         const updatedMovie = await Movie.findOne({
@@ -209,6 +247,7 @@ module.exports = {
 
     postMovie,
     getAllmovies,
+    getMoviePicture,
     updateMovie,
     deleteMovie
 
