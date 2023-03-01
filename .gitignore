@@ -1,2 +1,7 @@
 node_modules/
-src/uploads/
+/src/uploads/
+
+*.png
+*.jpg
+*.jpeg
+*.gif
