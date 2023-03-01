@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { postMovie, getAllmovies, updateMovie } = require("../controllers");
+const { postMovie, getAllmovies, updateMovie, deleteMovie } = require("../controllers");
 const { jwtValidation, RolJwtValidation } = require("../middlewares");
 
 
@@ -13,7 +13,7 @@ router.get('/', jwtValidation, getAllmovies);
 
 router.put('/:id', jwtValidation, RolJwtValidation, updateMovie);
 
-router.delete('/:id', jwtValidation, RolJwtValidation, updateMovie);
+router.delete('/:id', jwtValidation, RolJwtValidation, deleteMovie);
 
 
 

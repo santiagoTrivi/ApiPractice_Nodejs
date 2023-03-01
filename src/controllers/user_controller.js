@@ -2,6 +2,7 @@ const { request, response } = require("express");
 const bcryptjs = require('bcryptjs');
 const { Rol, User } = require('../models');
 const { Op } = require("sequelize");
+const { sender } = require("../helpers");
 
 
 const userRegister = async (req = request, res = response) => {
@@ -25,6 +26,23 @@ const userRegister = async (req = request, res = response) => {
         rolId: user.rolId
 
     }
+
+    const compose = {
+        from: 'santiagocarvajal103@gmail.com',
+        to: user.email,
+        subject: 'DisneyApi sign up',
+        text: `Dear ${user.name}, thanks for joing to Disney Api pratice. Made by Santiago`
+    }
+
+    await sender.sendMail(compose, (err, info) => {
+
+        if(err){
+            console.log(err);
+        }
+        
+        console.log(info);
+
+    });
     
 
     res.json({

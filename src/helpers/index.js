@@ -3,6 +3,7 @@ const {checkEmail} = require('./check_email');
 const {generatorjwt} = require('./jwt_generator');
 const {uploadFiles} = require('./file_upload.js');
 const {checkCharacter} = require('./check_character');
+const { sender } = require('./sending_email');
 
 module.exports = {
 
@@ -10,6 +11,7 @@ module.exports = {
     checkEmail,
     generatorjwt,
     uploadFiles,
-    checkCharacter
+    checkCharacter,
+    sender
 
 };
