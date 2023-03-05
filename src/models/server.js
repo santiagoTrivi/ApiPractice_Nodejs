@@ -2,7 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { sequelize } = require('../database/database_connection');
-const fileUpload = require('express-fileupload');
+const fileUpload = require('express-fileupload'); 
+const swaggerUi = require('swagger-ui-express');
+const { swaggerSpec } = require('../documentation/documentation_model');
+const swaggerJSDoc = require('swagger-jsdoc');
 
 
 class Server {
@@ -15,8 +18,8 @@ class Server {
         this.appPath = {
             login: '/disneyApi/auth/login',
             user: '/disneyApi/auth',
-            character: '/disneyApi/auth/characters',
-            movie: '/disneyApi/auth/movies'
+            character: '/disneyApi/characters',
+            movie: '/disneyApi/movies'
         };
 
         this.databaseConnection();
@@ -55,6 +58,8 @@ class Server {
             tempFileDir : '/tmp/',
             createParentPath: true
         }));
+
+        this.app.use('/disneyApi/docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(swaggerSpec)));
     };
 
 

@@ -51,7 +51,7 @@ const getAllCharacters = async( req = request, res = response ) => {
     try {
 
         if(name) {
-            let characters = await Character.findAndCountAll({
+            const characters = await Character.findAndCountAll({
                 where: {
                     name: { [Op.substring]: name }
                 }, 
@@ -68,7 +68,7 @@ const getAllCharacters = async( req = request, res = response ) => {
         } ;
         
         if(age) {
-            let characters = await Character.findAndCountAll({
+            const characters = await Character.findAndCountAll({
                 where: {
                     age: { [Op.substring]: age }
                 }, 
