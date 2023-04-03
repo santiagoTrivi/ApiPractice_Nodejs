@@ -45,7 +45,7 @@ const userRegister = async (req = request, res = response) => {
     });
     
 
-    res.json({
+    res.status(201).json({
         message: 'User registered successfuly',
         newUser
     });
@@ -72,7 +72,7 @@ const getAllUser = async( req = request, res = response) => {
 
         const total = await User.count({ where: { status: 1 } });
 
-        res.json( {total, users});
+        res.status(202).json( {total, users});
         
     } catch (error) {
         console.log(error);
@@ -112,7 +112,7 @@ const updateUser = async( req = request, res = response ) => {
             rolId: updates.rolId
         }
 
-        return res.json({status: 'Updated successfully', UpdatedUser});
+        return res.status(202).json({status: 'Updated successfully', UpdatedUser});
 
 
 
@@ -137,7 +137,7 @@ const deleteUser = async( req = request, res = response ) => {
             rolId: targetUser.rolId
         }
        
-        res.json({
+        res.status(202).json({
             status: 'User deleted successfully',
             deletedUser
         });
